@@ -17,8 +17,26 @@ def get_sigmoid_inline(var_name: str) -> str:
 
 
 def get_sigmoid() -> str:
-    return "double sigmoid(double x) {\n    return 1 / (1 + exp_approx(-x, 10));\n}\n\n"
+    return f"""
+double sigmoid(float x) {{
+    return 1 / (1 + exp_approx(-x, 10));
+}}
+"""
 
+def get_softmax() -> str:
+    return f"""
+double* softmax(double* values, int n_values) {{
+    double sum = 0;
+    for (int i = 0; i < n_values; i++) {{
+        sum += exp_approx(values[i], 10);
+    }}
+    double* results = malloc(n_values * sizeof(double));
+    for (int i = 0; i < n_values; i++) {{
+        results[i] = exp_approx(values[i], 10) / sum;
+    }}
+    return results;
+}}
+"""
 
 def linear_regression() -> str:
     return """

@@ -8,4 +8,7 @@ def get_c_matrix(python_matrix: list) -> str:
 
 
 def get_imports() -> str:
-    return "#include <stdio.h>\n\n"
+    return "#include <stdio.h>\n"
+
+def get_malloc() -> str:
+    return "#include <stdlib.h>\n"
